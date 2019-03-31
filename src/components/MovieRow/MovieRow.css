@@ -1,0 +1,115 @@
+.card {
+  width: 210px;
+  height: 460px;
+  margin: 1.4em;
+  padding: 0%;
+}
+
+.card img {
+  margin: 0%;
+  display: block;
+  height: 315px;
+}
+
+.card .card-img-overlay {
+  height: 315px;
+  opacity: 0;
+  mix-blend-mode: normal;
+  /* trimming movie summary */
+}
+
+.card .card-img-overlay .summary-title {
+  color: #50e3c2;
+  font-size: 20px;
+  margin-top: 4em;
+}
+
+.card .card-img-overlay .summary {
+  font-size: 12px;
+  color: #8c93aa;
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative;
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 3.6em;
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+}
+
+.card .card-img-overlay .summary:before {
+  /* points in the end */
+  content: "...";
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of block */
+  right: 0;
+  bottom: 0;
+}
+
+.card .card-img-overlay .summary:after {
+  /* points in the end */
+  content: "";
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of text */
+  right: 0;
+  width: 1em;
+  /* set width and height */
+  height: 1em;
+  margin-top: 0.2em;
+  background: white;
+}
+
+.card .card-img-overlay:hover {
+  display: block;
+  opacity: 0.7;
+  background: #2B3247;
+}
+
+.card .card-body {
+  height: 50px;
+  text-align: left;
+  margin: 0%;
+  margin-left: -1em;
+}
+
+.card .card-body .title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #50e3c2;
+  margin-top: -1em;
+}
+
+.card .card-body .genre,
+.card .card-body .year {
+  font-size: 10px;
+  color: #e2e5ef;
+}
+
+.card .card-body .genre span,
+.card .card-body .year span {
+  color: #50e3c2;
+}
+
+.card .card-body #card-info {
+  margin-top: -10px;
+}
+
+.card .rating {
+  height: 40px;
+  background: #3c4665;
+  border-radius: 4px;
+}
+
+.card .rating p {
+  font-size: 24px;
+  padding-left: 0.5em;
+  color: #50e3c2;
+}
+/*# sourceMappingURL=MovieRow.css.map */

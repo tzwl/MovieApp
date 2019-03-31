@@ -1,0 +1,31 @@
+svg{
+    border-radius:100%;
+    padding: 2px;
+    background:#2B3247;
+    
+  }
+    
+  .circle-background,
+  .circle-progress {
+    fill: none;
+  }
+  
+  .circle-background {
+    stroke: #D8D8D8;
+    opacity: 0.3;
+  }
+  
+  .circle-progress {
+    stroke: #50E3C2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .circle-text {
+       
+    fill: #FFFFFF;
+  }
+  .circle-text-percent{
+    fill: #FFFFFF;
+  }
+  

@@ -1,0 +1,18 @@
+.remove {
+  margin-bottom: -2em;
+  margin-top: 0.3em;
+  border-radius: 4px;
+  height: 40px;
+  border: none;
+}
+
+.remove p {
+  font-size: 15px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.remove:hover {
+  font-weight: bold;
+}
+/*# sourceMappingURL=WatchlistRow.css.map */
