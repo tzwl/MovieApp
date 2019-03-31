@@ -7,7 +7,8 @@ import ModalVideo from '../ModalVideo/ModalVideo.js';
 import { MdBookmark, MdStar,MdRemoveCircleOutline } from 'react-icons/md';
 import {API_KEY,PATH_MOVIE,PATH_BASE,PATH_COLLECTION,PATH_CREDIT,PATH_IMAGE,PATH_VIDEO,PATH_POSTER} from '../../api/api.js';
 import no_profile from '../../images/no-profile-img.png';
-import no_img from '../../images/no-image.png'
+import no_img from '../../images/no-image.png';
+import { watch } from 'fs';
 
 class MovieDetail extends React.Component {
   
@@ -92,7 +93,7 @@ class MovieDetail extends React.Component {
             }
             
             
-            const movielist = <span><img src={movie.poster_src} alt="img" /><p>{movie.original_title}</p></span>
+            const movielist = <span key={movie.id}><img src={movie.poster_src} alt="img" /><p>{movie.original_title}</p></span>
 
             popularList.push(movielist)
           })
@@ -136,9 +137,9 @@ class MovieDetail extends React.Component {
               
             }
 
-            console.log(cover);
+            // console.log(cover);
                         
-            const card = <div className='card casts'>
+            const card = <div className='card casts' key={value.id}>
               <img src={cover} alt="cast img" />
               <div className="card-body">
 
@@ -157,23 +158,23 @@ class MovieDetail extends React.Component {
             const job = value.job.toLowerCase();
 
             // console.log(job);
-            if (job == 'director') {
-              const director = <div className='col-6'>
-                <span className='job' >{value.job} </span><span className='name' >{value.name}</span>
+            if (job === 'director') {
+              const director = <div className='col-6' key={value.id}>
+                <span className='job'  >{value.job} </span><span className='name' >{value.name}</span>
               </div>
 
               directors.push(director)
             }
-            else if (job == 'writer') {
-              const writer = <div className='col-6'>
+            else if (job === 'writer') {
+              const writer = <div className='col-6' key={value.id}>
                 <span className='job' >{value.job} </span><span className='name' >{value.name}</span>
               </div>
 
               writers.push(writer)
 
             }
-            else if (job == 'story') {
-              const story = <div className='col-6'>
+            else if (job === 'story') {
+              const story = <div className='col-6' key={value.id}>
                 <span className='job' >{value.job} </span><span className='name' >{value.name}</span>
               </div>
 
@@ -215,7 +216,7 @@ class MovieDetail extends React.Component {
         background.forEach((value, index) => {
           if (index < 4) {
             const cover = PATH_POSTER+"/original" + value.file_path;
-            const bgimg = <div className='bgimg'><img src={cover} alt="cover img" ></img></div>
+            const bgimg = <div className='bgimg' key={index}><img src={cover} alt="cover img" ></img></div>
             bglist.push(bgimg);
 
           }
@@ -324,7 +325,7 @@ class MovieDetail extends React.Component {
               // // eliminate the dead keys & store unique objects
               .filter(
                   function(i) {
-                      return i != ind
+                      return i !== ind
                   }
               ).map(e => arr[e]);
   
@@ -344,19 +345,31 @@ class MovieDetail extends React.Component {
         //update the state for isSaved
         
         const watchlist = localStorage.getItem('watchlist');
-        const arr = JSON.parse(watchlist);
-        const ind = arr.map(e => e["id"]).indexOf(this.props.movieid);
-        console.log(ind);
+        const arr = JSON.parse(watchlist); 
+        console.log(watchlist);
 
-        //show remove from watchlist
-        if(ind>=0){                    
-          this.setState({isSaved: true});          
-          
-        //show add to watchlist
-        }else{
-          this.setState({isSaved: false});
-          
-        }
+        arr.forEach(value=>{
+          if(this.props.movieid === value.id){
+            this.setState({isSaved: true}); 
+          }
+        })
+        // if(!isNull(watchlist)){
+        //   const arr = JSON.parse(watchlist);        
+        //   const ind = arr.map(e => e["id"]).indexOf(this.props.movieid);
+        //   // console.log(ind);
+  
+        //   //show remove from watchlist
+        //   if(ind>=0){                    
+        //     this.setState({isSaved: true});          
+            
+        //   //show add to watchlist
+        //   }else{
+        //     this.setState({isSaved: false});
+            
+        //   }
+
+        // }
+        
     }   
   
 
@@ -366,7 +379,7 @@ class MovieDetail extends React.Component {
 
         <button onClick={this.props.close} className="backbtn">
           <svg height="25" width="25" style={{ marginTop: '0', background: 'none' }}>
-            <circle cx="10" cy="10" r="7" stroke="#50E3C2" stroke-width="2" fill="none" />
+            <circle cx="10" cy="10" r="7" stroke="#50E3C2" strokeWidth="2" fill="none" />
             <polyline points="12,13 8,10  12,7" style={{ fill: 'none', stroke: '#50E3C2', strokeWidth: 2 }} />
 
           </svg>
@@ -409,8 +422,6 @@ class MovieDetail extends React.Component {
             <div className="heading">
               <div id="userscore" style={{ width: '10%', display: 'inline-block' }}>
                 <CircularProgressBar
-                  strokeWidth="3.5"
-                  sqSize="60"
                   percentage={this.state.score} />
 
                 <br></br>

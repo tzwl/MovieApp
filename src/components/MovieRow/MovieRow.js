@@ -39,7 +39,7 @@ class MovieRow extends React.Component {
 
         genrelist.forEach((value, index) => {
 
-          if (index == genrelist.length - 1) {
+          if (index === genrelist.length - 1) {
             namestr += value
           } else {
             namestr += value + ","
@@ -75,7 +75,7 @@ class MovieRow extends React.Component {
       <div className="card" style={{ border: 'none',background:'transparent' }} >
 
         
-        <img alt="image" width="210" height="315" src={this.props.movie.poster_src} 
+        <img alt="no available" width="210" height="315" src={this.props.movie.poster_src} 
          />        
         
         <div className="card-img-overlay" onClick={this.openModal}>

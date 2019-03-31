@@ -216,7 +216,7 @@ class App extends Component {
     const boundObject = this
     const searchTerm = event.target.value
     // console.log("SearchTerm "+searchTerm)
-    if(event.target.value==""||event.target.value==null){
+    if(event.target.value===""||event.target.value===null){
       // console.log("input is null....")
       const showPopularMovie = this.showPopularMovie()
       
@@ -229,7 +229,7 @@ class App extends Component {
   //search bar for watchlist
   searchChangeHandler1(event) {
     console.log("search in watchlist")
-    if(event.target.value==""||event.target.value==null){
+    if(event.target.value===""||event.target.value===null){
       const watchlist = this.showWatchlist()
     }else{
       const watchlist = localStorage.getItem('watchlist');

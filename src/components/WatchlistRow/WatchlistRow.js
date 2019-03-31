@@ -42,7 +42,7 @@ class WatchlistRow extends React.Component {
 
         genrelist.forEach((value, index) => {
 
-          if (index == genrelist.length - 1) {
+          if (index === genrelist.length - 1) {
             namestr += value
           } else {
             namestr += value + ","
@@ -84,7 +84,7 @@ class WatchlistRow extends React.Component {
             // // eliminate the dead keys & store unique objects
             .filter(
                 function(i) {
-                    return i != ind
+                    return i !== ind
                 }
             ).map(e => arr[e]);
 
@@ -103,7 +103,7 @@ class WatchlistRow extends React.Component {
       <div className="card" style={{ display:this.state.show,border: 'none',background:'transparent' }} >
 
         
-        <img alt="image" width="210" height="315" src={this.props.movie.poster_src} 
+        <img alt="no availabel" width="210" height="315" src={this.props.movie.poster_src} 
          />        
         
         <div className="card-img-overlay" onClick={this.openModal}>

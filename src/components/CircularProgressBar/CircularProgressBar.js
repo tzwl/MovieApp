@@ -4,46 +4,50 @@ import './CircularProgressBar.css';
 class CircularProgressBar extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+        size: 55,
+        value: 0,
+        strokewidth: 3
+      };
     }
   
     render() {
-      // Size of the enclosing square
-      const sqSize = this.props.sqSize;
-      // SVG centers the stroke width on the radius, subtract out so circle fits in square
-      const radius = (this.props.sqSize - this.props.strokeWidth) / 2;
-      // Enclose cicle in a circumscribing square
-      const viewBox = `0 0 ${sqSize} ${sqSize}`;
-      // Arc length at 100% coverage is the circle circumference
-      const dashArray = radius * Math.PI * 2;
-      // Scale 100% coverage overlay with the actual percent
-      const dashOffset = dashArray - dashArray * this.props.percentage / 100;
+      
+      const average = this.props.percentage ;
+      const halfsize = this.state.size * 0.5;
+      const radius = halfsize - this.state.strokewidth * 0.5;
+      const circumference = 2 * Math.PI * radius;
+      const strokeval = (average * circumference) / 100;
+      const dashval = strokeval + " " + circumference;
   
-      return (
+      const trackstyle = { strokeWidth: this.state.strokewidth };
+      const indicatorstyle = {
+        strokeWidth: this.state.strokewidth,
+        strokeDasharray: dashval
+      };
+      const rotateval = "rotate(-90 " + halfsize + "," + halfsize + ")";
+  
+      return (                  
         <svg
-            width={this.props.sqSize}
-            height={this.props.sqSize}
-            viewBox={viewBox}
-            >
+            width={63}
+            height={63}
+            >     
             <circle
+              r={radius}
+              cx={halfsize-2.5}
+              cy={halfsize+3}
+              transform={rotateval}
+              style={trackstyle}
               className="circle-background"
-              cx={this.props.sqSize / 2}
-              cy={this.props.sqSize / 2}
-              r={radius}
-              strokeWidth={`${this.props.strokeWidth}px`} 
-              />
+            />
             <circle
-              className="circle-progress"
-              cx={this.props.sqSize / 2}
-              cy={this.props.sqSize / 2}
               r={radius}
-              strokeWidth={`${this.props.strokeWidth}px`}
-              // Start progress marker at 12 O'Clock
-              transform={`rotate(-90 ${this.props.sqSize / 2} ${this.props.sqSize / 2})`}
-              style={{
-                strokeDasharray: dashArray,
-                strokeDashoffset: dashOffset
-              }} />
+              cx={halfsize-2.5}
+              cy={halfsize+3}
+              transform={rotateval}
+              style={indicatorstyle}
+              className="circle-progress"
+            />
             <text
               className="circle-text"
               x="46%"
@@ -57,7 +61,7 @@ class CircularProgressBar extends React.Component {
             <text
               className="circle-text-percent"
               x="76%"
-              y="50%"
+              y="48%"
               textAnchor="middle"
               style={{fontSize:'10px'}}
               >

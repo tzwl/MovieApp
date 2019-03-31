@@ -1,23 +1,21 @@
 svg {
-  border-radius: 100%;
-  padding: 2px;
+  border-radius: 50%;
+  padding: 1px;
   background: #2B3247;
-}
-
-.circle-background,
-.circle-progress {
-  fill: none;
 }
 
 .circle-background {
   stroke: #D8D8D8;
   opacity: 0.3;
+  fill: transparent;
 }
 
 .circle-progress {
   stroke: #50E3C2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-dasharray: 0 10000;
+  fill: none;
 }
 
 .circle-text {
